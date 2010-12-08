@@ -29,12 +29,12 @@ diag" Testing list\n"
                        0 1      =deeply" remaining items" ?sp
 
 :noname 0 list> ; 
-    list-empty-exception throw-ok" empty exception" ?sp
+  list-empty-exception throw-ok" empty exception" ?sp
 
 \ lzip
 
 :noname 0 1 1 lzip ; 
-    list-size-exception throw-ok" size exception" ?sp
+  list-size-exception throw-ok" size exception" ?sp
 
 \ test-bad-size ?sp
 
