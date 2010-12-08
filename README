@@ -1,0 +1,50 @@
+The Test Anything Protocol [1] is a simple protocol for expressing
+the results of unit tests. This is a gforth implementation of a
+TAP producer.
+
+Currently I'm using it with Perl's prove command. Given a test script
+like this:
+
+    #! /usr/local/bin/gforth
+
+    require ../lib/test-more.fs
+
+    2 plan
+
+    diag" Testing\n"
+
+    \ Test dup. Probably works.
+
+    {sp
+
+    1 dup =ok" dup works" ?sp
+
+    }sp
+
+    bye
+
+And assuming a recent version of Perl is installed you can:
+
+    $ prove t/dup.fs
+
+and get results like this:
+
+    t/dup....# Testing
+    t/dup....ok                                                                  
+    All tests successful.
+    Files=1, Tests=2,  0 wallclock secs ( 0.01 cusr +  0.02 csys =  0.03 CPU)
+
+or to see individual results:
+
+    $ prove -v t/dup.fs
+    t/dup....# Testing
+    1..2
+    ok 1 dup works
+    ok 2 stack balanced
+    ok
+    All tests successful.
+    Files=1, Tests=2,  0 wallclock secs ( 0.01 cusr +  0.02 csys =  0.03 CPU)
+
+This release should be considered alpha. If you find it useful please let me know.
+
+[1] http://testanything.org/
