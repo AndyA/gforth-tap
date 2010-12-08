@@ -41,3 +41,22 @@ s" List sizes differ" exception Constant list-size-exception
   dup dup 2* 1+ swap 1+ lzip-loop
   +
 ;
+
+: lroll ( n0 ... nn u m0 ... mn u 1 -- m0 ... mn u n0 ... nn )
+  \ Calc size of all lists and keep track of size of last list
+  0 0
+  rot 1+ 0 ?do
+    nip dup 1+ pick 1+ dup rot +
+  loop 
+  1-
+  \ Roll them
+  swap
+  0 ?do
+    dup >r roll r>
+  loop
+  drop
+;
+
+: lswap ( n0 ... nn u m0 ... mn u -- m0 ... mn u n0 ... nn )
+  1 lroll
+;

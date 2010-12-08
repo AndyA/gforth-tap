@@ -2,7 +2,7 @@
 require ../lib/test-more.fs
 require ../lib/list.fs
 
-30 plan
+34 plan
 
 {sp
 
@@ -45,7 +45,18 @@ diag" Testing list\n"
 
 \ More stuff just for fun
 
-13 14 15 3 ldup lzip 13 13 14 14 15 15 6 7 =deeply" ldup, lzip" ?sp
+13 14 15 3 ldup lzip
+  13 13 14 14 15 15 6 7 =deeply" ldup, lzip" ?sp
+
+13 14 15 3 20 21 2 1 lroll
+  20 21 2 13 14 15 3 7 =deeply" lroll" ?sp
+
+20 21 2 13 14 15 3 1 lroll
+  13 14 15 3 20 21 2 7 =deeply" lroll 2" ?sp
+
+10 1 20 21 2 30 31 32 3 2 lroll
+  20 21 2 30 31 32 3 10 1 9 =deeply" lroll 3" ?sp
+
 
 }sp
 
