@@ -2,7 +2,7 @@
 require ../lib/test-more.fs
 require ../lib/list.fs
 
-34 plan
+38 plan
 
 {sp
 
@@ -57,6 +57,8 @@ diag" Testing list\n"
 10 1 20 21 2 30 31 32 3 2 lroll
   20 21 2 30 31 32 3 10 1 9 =deeply" lroll 3" ?sp
 
+13 14 15 3 20 21 2 lswap
+  20 21 2 13 14 15 3 7 =deeply" lswap" ?sp
 
 }sp
 
