@@ -209,7 +209,11 @@ Variable frame
   try
     execute         \ should fail
     0               \ in case of success
+[undefined] recover [if]
   restore
+[else]
+  recover
+[then]
     \ I'm not quite sure why but a failed execute
     \ leaves an extra value behind the exception code
     nip
