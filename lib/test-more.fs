@@ -206,14 +206,14 @@ Variable frame
 : throw-ok ( xt u c-addr u -- )
     2swap swap
     {sp swap
-    TRY
+    try
         execute         \ should fail
         0               \ in case of success
-    RESTORE
+    restore
         \ I'm not quite sure why but a failed execute
         \ leaves an extra value behind the exception code
         nip
-    ENDTRY
+    endtry
     swap }sp
     2swap 
     =ok
