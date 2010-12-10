@@ -37,7 +37,7 @@ s" List sizes differ" exception Constant list-size-exception
 
 \ Zip two identically sized lists together
 : lzip ( n0 ... nn u m0 ... mn u -- n0 ... nn u )
-  dup dup 1+ 1+ pick <> list-size-exception and throw
+  dup dup 2 + pick <> list-size-exception and throw
   dup dup 2* 1+ swap 1+ lzip-loop
   +
 ;
