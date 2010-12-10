@@ -43,8 +43,6 @@ diag" Testing list\n"
   10 11 2
   20 21 2 lzip 10 20 11 21 4 5 =deeply" zip two el lists"    ?sp
 
-\ More stuff just for fun
-
 13 14 15 3 ldup lzip
   13 13 14 14 15 15 6 7 =deeply" ldup, lzip" ?sp
 
