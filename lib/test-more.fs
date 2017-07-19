@@ -5,29 +5,6 @@ Variable test#
 Variable test-planned
 test-planned off
 
-\ Convert a word that accepts a counted string ( c-addr u -- ) into an
-\ inline quoting word. For example after
-\ 
-\     : spork ( c-addr u -- ) ." Spork" type ;
-\     ' spork quoting-alias spork"
-\ 
-\ you can do
-\ 
-\     spork" Hello, World"
-\ 
-\ C-style escapes (\n etc) are handled
-: quoting-alias ( xt "name" -- )
-  create-interpret/compile
-    ,
-    interpretation>
-      @ \"-parse rot execute
-    <interpretation
-    compilation>
-      postpone s\"
-      @ compile,
-    <compilation 
-;
-
 \ Output a newline and flush the output stream
 : cr-flush
   cr
@@ -73,7 +50,9 @@ warnings !
 ;
 
 \ Create quoting version
-' diag    quoting-alias diag"     \ "
+:NONAME \"-parse diag ;
+:NONAME POSTPONE S\" POSTPONE diag ;
+interpret/compile: diag"
 
 : diag-out ( n c-addr u -- )
   >stderr
@@ -168,11 +147,21 @@ warnings !
 ;
 
 \ Create quoting versions
-' ok       quoting-alias ok"       \ "
-' pass     quoting-alias pass"     \ "
-' fail     quoting-alias fail"     \ "
-' =ok      quoting-alias =ok"      \ "
-' =deeply  quoting-alias =deeply"  \ "
+:NONAME \"-parse ok ;
+:NONAME POSTPONE S\" POSTPONE ok ;
+interpret/compile: ok"
+:NONAME \"-parse pass ;
+:NONAME POSTPONE S\" POSTPONE pass ;
+interpret/compile: pass"
+:NONAME \"-parse fail ;
+:NONAME POSTPONE S\" POSTPONE fail ;
+interpret/compile: fail"
+:NONAME \"-parse =ok ;
+:NONAME POSTPONE S\" POSTPONE =ok ;
+interpret/compile: =ok"
+:NONAME \"-parse =deeply ;
+:NONAME POSTPONE S\" POSTPONE =deeply ;
+interpret/compile: =deeply"
 
 \ Create a stack frame in which tests can be run to verify they don't
 \ pollute the stack
@@ -223,4 +212,6 @@ Variable frame
   =ok
 ;
 
-' throw-ok quoting-alias throw-ok" \ "
+:NONAME \"-parse throw-ok ;
+:NONAME POSTPONE S\" POSTPONE throw-ok ;
+interpret/compile: throw-ok"
